@@ -64,7 +64,8 @@ def get_company_profile(symbol: str) -> Dict[str, Any]:
         result["symbol"] = symbol
         return result
 
-    profile_data = result["data"][0] if isinstance(result["data"], list) else result["data"]
+    profile_data = result["data"][0] if isinstance(
+        result["data"], list) else result["data"]
 
     return {
         "success": True,
@@ -87,7 +88,7 @@ def get_company_profile(symbol: str) -> Dict[str, Any]:
 
 
 @tool(expected_credentials=[{"app_id": FMP_APP_ID, "type": ConnectionType.API_KEY_AUTH}])
-def get_income_statement(symbol: str, period: str = "annual", limit: int = 100) -> Dict[str, Any]:
+def get_income_statement(symbol: str, period: str = "annual", limit: int = 5) -> Dict[str, Any]:
     """Get annual or quarterly income statements showing revenue, expenses, and profitability.
 
     Args:
@@ -101,7 +102,7 @@ def get_income_statement(symbol: str, period: str = "annual", limit: int = 100) 
     result = make_fmp_request(
         "income-statement",
         {"symbol": symbol.upper(), "period": period, "limit": limit}
-        )
+    )
 
     if not result["success"]:
         result["symbol"] = symbol
@@ -138,7 +139,7 @@ def get_income_statement(symbol: str, period: str = "annual", limit: int = 100) 
 
 
 @tool(expected_credentials=[{"app_id": FMP_APP_ID, "type": ConnectionType.API_KEY_AUTH}])
-def get_balance_sheet(symbol: str, period: str = "annual", limit: int = 100) -> Dict[str, Any]:
+def get_balance_sheet(symbol: str, period: str = "annual", limit: int = 5) -> Dict[str, Any]:
     """Get balance sheet data showing assets, liabilities, and shareholder equity.
 
     Args:
@@ -188,7 +189,7 @@ def get_balance_sheet(symbol: str, period: str = "annual", limit: int = 100) -> 
 
 
 @tool(expected_credentials=[{"app_id": FMP_APP_ID, "type": ConnectionType.API_KEY_AUTH}])
-def get_cash_flow_statement(symbol: str, period: str = "annual", limit: int = 100) -> Dict[str, Any]:
+def get_cash_flow_statement(symbol: str, period: str = "annual", limit: int = 5) -> Dict[str, Any]:
     """Get cash flow statements showing operating, investing, and financing activities.
 
     Args:
@@ -235,13 +236,13 @@ def get_cash_flow_statement(symbol: str, period: str = "annual", limit: int = 10
 
 
 @tool(expected_credentials=[{"app_id": FMP_APP_ID, "type": ConnectionType.API_KEY_AUTH}])
-def get_financial_ratios(symbol: str, period: str = "annual", limit: int = 100) -> Dict[str, Any]:
+def get_financial_ratios(symbol: str, period: str = "annual", limit: int = 5) -> Dict[str, Any]:
     """Get comprehensive financial ratios for profitability, liquidity, and efficiency analysis.
 
     Args:
         symbol (str): Stock ticker symbol (e.g., 'AAPL', 'MSFT')
         period (str): 'annual' or 'quarter' (default: 'annual')
-        limit (int): Number of periods to retrieve (default: 100)
+        limit (int): Number of periods to retrieve (default: 5)
 
     Returns:
         dict: Financial ratios including ROE, ROA, current ratio, debt ratios, profit margins
@@ -279,7 +280,19 @@ def get_financial_ratios(symbol: str, period: str = "annual", limit: int = 100) 
             "inventory_turnover": ratio.get("inventoryTurnover"),
             # Valuation
             "price_earnings_ratio": ratio.get("priceEarningsRatio"),
-            "price_to_book_ratio": ratio.get("priceToBookRatio")
+            "price_to_book_ratio": ratio.get("priceToBookRatio"),
+            "priceToSalesRatio": ratio.get("priceToSalesRatio"),
+            "priceToFreeCashFlowRatio": ratio.get("priceToFreeCashFlowRatio"),
+            "priceToOperatingCashFlowRatio": ratio.get("priceToOperatingCashFlowRatio"),
+            "debtToAssetsRatio": ratio.get("debtToAssetsRatio"),
+            "debtToEquityRatio": ratio.get("debtEquityRatio"),
+            "debtToCapitalRatio": ratio.get("debtToCapitalRatio"),
+            "longTermDebtToCapitalRatio": ratio.get("longTermDebtToCapitalRatio"),
+            "financialLeverageRatio": ratio.get("financialLeverageRatio"),
+            "workingCapitalTurnoverRatio": ratio.get("workingCapitalTurnoverRatio"),
+            "operatingCashFlowRatio": ratio.get("operatingCashFlowRatio"),
+            "operatingCashFlowSalesRatio": ratio.get("operatingCashFlowSalesRatio"),
+            "freeCashFlowOperatingCashFlowRatio": ratio.get("freeCashFlowOperatingCashFlowRatio")
         })
 
     return {
@@ -292,7 +305,7 @@ def get_financial_ratios(symbol: str, period: str = "annual", limit: int = 100) 
 
 
 @tool(expected_credentials=[{"app_id": FMP_APP_ID, "type": ConnectionType.API_KEY_AUTH}])
-def get_key_metrics(symbol: str, period: str = "annual", limit: int = 100) -> Dict[str, Any]:
+def get_key_metrics(symbol: str, period: str = "annual", limit: int = 5) -> Dict[str, Any]:
     """Get key financial metrics and valuation indicators.
 
     Args:
@@ -365,11 +378,16 @@ def get_comprehensive_analysis(symbol: str, years: int = 3) -> Dict[str, Any]:
 
     # Make API requests directly instead of calling other tool functions
     profile_result = make_fmp_request("profile", {"symbol": symbol})
-    income_result = make_fmp_request("income-statement", {"symbol": symbol, "period": "annual", "limit": years})
-    balance_result = make_fmp_request("balance-sheet-statement", {"symbol": symbol, "period": "annual", "limit": years})
-    cash_flow_result = make_fmp_request("cash-flow-statement", {"symbol": symbol, "period": "annual", "limit": years})
-    ratios_result = make_fmp_request("ratios", {"symbol": symbol, "period": "annual", "limit": years})
-    metrics_result = make_fmp_request("key-metrics", {"symbol": symbol, "period": "annual", "limit": years})
+    income_result = make_fmp_request(
+        "income-statement", {"symbol": symbol, "period": "annual", "limit": years})
+    balance_result = make_fmp_request(
+        "balance-sheet-statement", {"symbol": symbol, "period": "annual", "limit": years})
+    cash_flow_result = make_fmp_request(
+        "cash-flow-statement", {"symbol": symbol, "period": "annual", "limit": years})
+    ratios_result = make_fmp_request(
+        "ratios", {"symbol": symbol, "period": "annual", "limit": years})
+    metrics_result = make_fmp_request(
+        "key-metrics", {"symbol": symbol, "period": "annual", "limit": years})
 
     # Check if any critical data failed
     failures = []
@@ -391,7 +409,8 @@ def get_comprehensive_analysis(symbol: str, years: int = 3) -> Dict[str, Any]:
         }
 
     # Extract profile data
-    profile_data = profile_result["data"][0] if isinstance(profile_result["data"], list) else profile_result["data"]
+    profile_data = profile_result["data"][0] if isinstance(
+        profile_result["data"], list) else profile_result["data"]
 
     # Process income statements
     income_statements = []
