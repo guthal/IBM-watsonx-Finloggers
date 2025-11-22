@@ -87,7 +87,7 @@ def get_company_profile(symbol: str) -> Dict[str, Any]:
 
 
 @tool(expected_credentials=[{"app_id": FMP_APP_ID, "type": ConnectionType.API_KEY_AUTH}])
-def get_income_statement(symbol: str, period: str = "annual", limit: int = 5) -> Dict[str, Any]:
+def get_income_statement(symbol: str, period: str = "annual", limit: int = 100) -> Dict[str, Any]:
     """Get annual or quarterly income statements showing revenue, expenses, and profitability.
 
     Args:
@@ -138,7 +138,7 @@ def get_income_statement(symbol: str, period: str = "annual", limit: int = 5) ->
 
 
 @tool(expected_credentials=[{"app_id": FMP_APP_ID, "type": ConnectionType.API_KEY_AUTH}])
-def get_balance_sheet(symbol: str, period: str = "annual", limit: int = 5) -> Dict[str, Any]:
+def get_balance_sheet(symbol: str, period: str = "annual", limit: int = 100) -> Dict[str, Any]:
     """Get balance sheet data showing assets, liabilities, and shareholder equity.
 
     Args:
@@ -188,7 +188,7 @@ def get_balance_sheet(symbol: str, period: str = "annual", limit: int = 5) -> Di
 
 
 @tool(expected_credentials=[{"app_id": FMP_APP_ID, "type": ConnectionType.API_KEY_AUTH}])
-def get_cash_flow_statement(symbol: str, period: str = "annual", limit: int = 5) -> Dict[str, Any]:
+def get_cash_flow_statement(symbol: str, period: str = "annual", limit: int = 100) -> Dict[str, Any]:
     """Get cash flow statements showing operating, investing, and financing activities.
 
     Args:
@@ -235,13 +235,13 @@ def get_cash_flow_statement(symbol: str, period: str = "annual", limit: int = 5)
 
 
 @tool(expected_credentials=[{"app_id": FMP_APP_ID, "type": ConnectionType.API_KEY_AUTH}])
-def get_financial_ratios(symbol: str, period: str = "annual", limit: int = 5) -> Dict[str, Any]:
+def get_financial_ratios(symbol: str, period: str = "annual", limit: int = 100) -> Dict[str, Any]:
     """Get comprehensive financial ratios for profitability, liquidity, and efficiency analysis.
 
     Args:
         symbol (str): Stock ticker symbol (e.g., 'AAPL', 'MSFT')
         period (str): 'annual' or 'quarter' (default: 'annual')
-        limit (int): Number of periods to retrieve (default: 5)
+        limit (int): Number of periods to retrieve (default: 100)
 
     Returns:
         dict: Financial ratios including ROE, ROA, current ratio, debt ratios, profit margins
@@ -292,7 +292,7 @@ def get_financial_ratios(symbol: str, period: str = "annual", limit: int = 5) ->
 
 
 @tool(expected_credentials=[{"app_id": FMP_APP_ID, "type": ConnectionType.API_KEY_AUTH}])
-def get_key_metrics(symbol: str, period: str = "annual", limit: int = 5) -> Dict[str, Any]:
+def get_key_metrics(symbol: str, period: str = "annual", limit: int = 100) -> Dict[str, Any]:
     """Get key financial metrics and valuation indicators.
 
     Args:
