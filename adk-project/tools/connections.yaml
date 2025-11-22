@@ -1,0 +1,15 @@
+spec_version: v1
+kind: connection
+app_id: fmp_financial_api
+environments:
+    draft:
+        kind: api_key
+        type: team
+        sso: false
+        server_url: https://financialmodelingprep.com/stable/
+    live:
+        kind: api_key
+        type: member
+        sso: false
+        server_url: https://financialmodelingprep.com/stable/
+
