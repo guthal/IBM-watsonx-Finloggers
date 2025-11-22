@@ -257,43 +257,44 @@ def get_financial_ratios(symbol: str, period: str = "annual", limit: int = 5) ->
         return result
 
     ratios = []
-    for ratio in result["data"]:
-        ratios.append({
-            "date": ratio.get("date"),
-            "fiscal_year": ratio.get("calendarYear"),
-            "period": ratio.get("period"),
-            # Profitability Ratios
-            "gross_profit_margin": ratio.get("grossProfitMargin"),
-            "operating_profit_margin": ratio.get("operatingProfitMargin"),
-            "net_profit_margin": ratio.get("netProfitMargin"),
-            "return_on_equity": ratio.get("returnOnEquity"),
-            "return_on_assets": ratio.get("returnOnAssets"),
-            # Liquidity Ratios
-            "current_ratio": ratio.get("currentRatio"),
-            "quick_ratio": ratio.get("quickRatio"),
-            "cash_ratio": ratio.get("cashRatio"),
-            # Leverage Ratios
-            "debt_ratio": ratio.get("debtRatio"),
-            "debt_equity_ratio": ratio.get("debtEquityRatio"),
-            # Efficiency Ratios
-            "asset_turnover": ratio.get("assetTurnover"),
-            "inventory_turnover": ratio.get("inventoryTurnover"),
-            # Valuation
-            "price_earnings_ratio": ratio.get("priceEarningsRatio"),
-            "price_to_book_ratio": ratio.get("priceToBookRatio"),
-            "priceToSalesRatio": ratio.get("priceToSalesRatio"),
-            "priceToFreeCashFlowRatio": ratio.get("priceToFreeCashFlowRatio"),
-            "priceToOperatingCashFlowRatio": ratio.get("priceToOperatingCashFlowRatio"),
-            "debtToAssetsRatio": ratio.get("debtToAssetsRatio"),
-            "debtToEquityRatio": ratio.get("debtEquityRatio"),
-            "debtToCapitalRatio": ratio.get("debtToCapitalRatio"),
-            "longTermDebtToCapitalRatio": ratio.get("longTermDebtToCapitalRatio"),
-            "financialLeverageRatio": ratio.get("financialLeverageRatio"),
-            "workingCapitalTurnoverRatio": ratio.get("workingCapitalTurnoverRatio"),
-            "operatingCashFlowRatio": ratio.get("operatingCashFlowRatio"),
-            "operatingCashFlowSalesRatio": ratio.get("operatingCashFlowSalesRatio"),
-            "freeCashFlowOperatingCashFlowRatio": ratio.get("freeCashFlowOperatingCashFlowRatio")
-        })
+    ratios.append(result["data"])
+    # for ratio in result["data"]:
+    #     ratios.append({
+    #         "date": ratio.get("date"),
+    #         "fiscal_year": ratio.get("calendarYear"),
+    #         "period": ratio.get("period"),
+    #         # Profitability Ratios
+    #         "gross_profit_margin": ratio.get("grossProfitMargin"),
+    #         "operating_profit_margin": ratio.get("operatingProfitMargin"),
+    #         "net_profit_margin": ratio.get("netProfitMargin"),
+    #         "return_on_equity": ratio.get("returnOnEquity"),
+    #         "return_on_assets": ratio.get("returnOnAssets"),
+    #         # Liquidity Ratios
+    #         "current_ratio": ratio.get("currentRatio"),
+    #         "quick_ratio": ratio.get("quickRatio"),
+    #         "cash_ratio": ratio.get("cashRatio"),
+    #         # Leverage Ratios
+    #         "debt_ratio": ratio.get("debtRatio"),
+    #         "debt_equity_ratio": ratio.get("debtEquityRatio"),
+    #         # Efficiency Ratios
+    #         "asset_turnover": ratio.get("assetTurnover"),
+    #         "inventory_turnover": ratio.get("inventoryTurnover"),
+    #         # Valuation
+    #         "price_earnings_ratio": ratio.get("priceEarningsRatio"),
+    #         "price_to_book_ratio": ratio.get("priceToBookRatio"),
+    #         "priceToSalesRatio": ratio.get("priceToSalesRatio"),
+    #         "priceToFreeCashFlowRatio": ratio.get("priceToFreeCashFlowRatio"),
+    #         "priceToOperatingCashFlowRatio": ratio.get("priceToOperatingCashFlowRatio"),
+    #         "debtToAssetsRatio": ratio.get("debtToAssetsRatio"),
+    #         "debtToEquityRatio": ratio.get("debtEquityRatio"),
+    #         "debtToCapitalRatio": ratio.get("debtToCapitalRatio"),
+    #         "longTermDebtToCapitalRatio": ratio.get("longTermDebtToCapitalRatio"),
+    #         "financialLeverageRatio": ratio.get("financialLeverageRatio"),
+    #         "workingCapitalTurnoverRatio": ratio.get("workingCapitalTurnoverRatio"),
+    #         "operatingCashFlowRatio": ratio.get("operatingCashFlowRatio"),
+    #         "operatingCashFlowSalesRatio": ratio.get("operatingCashFlowSalesRatio"),
+    #         "freeCashFlowOperatingCashFlowRatio": ratio.get("freeCashFlowOperatingCashFlowRatio")
+    #     })
 
     return {
         "success": True,
